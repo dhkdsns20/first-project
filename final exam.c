@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -546,7 +547,7 @@ void merge_sort(int list[], int left, int right) {
     }
 }
 
-int main() {
+void ex1003() {
     int i;
     int n = MAX_SIZE;
     int list[8] = { 21, 10, 12, 20, 25, 13, 15, 22 };
@@ -556,4 +557,114 @@ int main() {
     for (i = 0; i < n; i++) {
         printf("%d\n", list[i]);
     }
+}
+
+void ex1101(void)
+{
+    FILE* fp = NULL;
+    int c;
+    fp = fopen("sample.txt", "r");
+    if (fp == NULL)
+        printf("파일 열기 실패\n");
+    else
+        printf("파일 열기 성공\n");
+
+    while ((c = fgetc(fp)) != EOF)
+        putchar(c);
+    fclose(fp);
+}
+
+void ex1102(void)
+{
+    int i;
+    int buffer[SIZE] = { 10, 20, 30, 40, 50 };
+    FILE* fp = NULL;
+
+    fp = fopen("binary.bin", "wb"); // ①
+    if (fp == NULL)
+    {
+        fprintf(stderr, "binary.bin 파일을열수없습니다.");
+        return 1;
+    }
+
+    fwrite(buffer, sizeof(int), SIZE, fp); // ②
+
+    for (i = 0; i < SIZE; i++)
+        printf("%d ", buffer[i]);
+
+    fclose(fp);
+}
+
+void generate_random(int* array, int size)	// 난수 생성 함수 선언
+{
+    int n;
+    for (n = 0; n < size; n++)
+        array[n] = (rand() % 1000) + 1;
+}
+void print_array(FILE* fp, char* str, int* array, int size)// 배열 출력 힘수 선언
+{
+    int n;
+    fprintf(fp, "%s %d\n", str, size);
+    for (n = 0; n < size; n++) {
+        fprintf(fp, "%5d", array[n]);
+        if ((n + 1) % 10 == 0)
+            fprintf(fp, "\n");
+    }
+    fprintf(fp, "\n");
+}
+
+void save_data(int array[], int size) {
+    FILE* fp;
+    fp = fopen("sorted.txt", "w");
+    if (fp != NULL) {
+        print_array(fp, "정렬:", array, size);
+        fclose(fp);
+    }
+}
+
+void swap(int* x, int* y)	// 두 수를 바꾸는 함수 선언
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+void bubble(int array[], int last) {
+    for (int n = 0; n < last - 1; n++) { //last직전까지 교환을 반복
+        for (int m = 0; m < last - n - 1; m++) { //큰 값을 제외한 나머지 배열에서의 정렬
+            if (array[m] > array[m + 1])
+                swap(&array[m], &array[m + 1]);
+        }
+    }
+}
+
+void ex1103() {
+    int* data = NULL, size = 0;  // 변수 
+    int index, key = 1;
+    char temp[20];               // 파일 읽기에 필요한 변수
+    int n;
+    char* fpath = "sorted.txt";
+    FILE* fp = fopen(fpath, "r"); // 파일 포인터 선언 및 파일 열기
+
+    if (fp != NULL) {    // 파일을 성공적으로 열었다면
+        fscanf(fp, "%s %d", temp, &size); // “원본:”과 데이터 크기를 읽는다
+        if (size != 0) {
+            data = (int*)malloc(sizeof(int) * size); // 배열을 동적으로 할당한다
+            for (n = 0; n < size; n++) // 데이터를 읽는다
+                fscanf(fp, "%d", &data[n]);
+        }
+        fclose(fp); // 파일을 닫는다
+    }
+    else
+        printf("파일이 존재하지 않습니다.");
+
+    print_array(stdout, "원본: ", data, size);
+    while (key > 0) {
+        printf("검색할 수를 입력하세요: "); // 사용자의 입력을 받는다. 
+        scanf("%d", &key);
+        if (key > 0) {  // key를 탐색하고 결과를 출력한다. // 추후 구현
+            printf("%d를 탐색합니다.\n", key);
+        }
+    } printf("프로그램을 종료합니다.\n\n");
 }
