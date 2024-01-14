@@ -1,25 +1,27 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
+#include <string.h>
 
-#define	SIZE	10	// ¹è¿­ÀÇ Å©±â¸¦ ¼±¾ğÇÑ´Ù.
-void print_array(int array[]);	// ¹è¿­ µ¥ÀÌÅÍ¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
-int find_max(int array[]);		// ¹è¿­¿¡¼­ °ªÀÌ °¡Àå Å« ¿ø¼ÒÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏ
+#define	SIZE	10	// ë°°ì—´ì˜ í¬ê¸°ë¥¼ ì„ ì–¸í•œë‹¤.
+void print_array(int array[]);	// ë°°ì—´ ë°ì´í„°ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+int find_max(int array[]);		// ë°°ì—´ì—ì„œ ê°’ì´ ê°€ì¥ í° ì›ì†Œì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´
 
 void ex0901(void)
 {
     int data[SIZE] = { 3, 2, 9, 7, 1, 4, 8, 0, 6, 5 };
     int maxindex;
 
-    print_array(data);		// ¹è¿­ÀÇ °ªÀ» Ãâ·ÂÇÑ´Ù.
-    maxindex = find_max(data);	// ÃÖ´ë °ªÀÌ ÀúÀåµÇ¾î ÀÖ´Â ¹è¿­ÀÇ ÀÎµ¦½º¸¦ ±¸ÇÑ´Ù.
-    printf("ÃÖ´ë°ª: data[%d] = %d\n", maxindex, data[maxindex]);	// Ãâ·Â
+    print_array(data);		// ë°°ì—´ì˜ ê°’ì„ ì¶œë ¥í•œë‹¤.
+    maxindex = find_max(data);	// ìµœëŒ€ ê°’ì´ ì €ì¥ë˜ì–´ ìˆëŠ” ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¥¼ êµ¬í•œë‹¤.
+    printf("ìµœëŒ€ê°’: data[%d] = %d\n", maxindex, data[maxindex]);	// ì¶œë ¥
 }
 
 void print_array(int array[]) {
     int n;
-    printf("¹è¿­ÀÇ °ª\n");
+    printf("ë°°ì—´ì˜ ê°’\n");
     for (n = 0; n < SIZE; n++) {
         printf("data[%d]=%d ", n, array[n]);
         if ((n + 1) % 5 == 0)
@@ -61,7 +63,7 @@ void generate_lotto(int arr_lotto[]) {
 }
 
 void user_check(int arr_user[]) {
-    printf("1~45 »çÀÌÀÇ ¹øÈ£¸¦ 6°³ ¼±ÅÃÇÏ¼¼¿ä : ");
+    printf("1~45 ì‚¬ì´ì˜ ë²ˆí˜¸ë¥¼ 6ê°œ ì„ íƒí•˜ì„¸ìš” : ");
     for (int i = 0; i < 6; i++) {
         scanf("%d", &arr_user[i]);
     }
@@ -76,12 +78,12 @@ void ex0902(void) {
     user_check(arr_user);
     generate_lotto(arr_lotto);
 
-    printf("\nÀÔ·Â ¹øÈ£:  ");
+    printf("\nì…ë ¥ ë²ˆí˜¸:  ");
     for (i = 0; i < 6; i++) {
         printf("%3d ", arr_user[i]);
     }
 
-    printf("\n´çÃ· ¹øÈ£: ");
+    printf("\në‹¹ì²¨ ë²ˆí˜¸: ");
     for (i = 0; i < 6; i++) {
         printf("%3d ", arr_lotto[i]);
     }
@@ -94,7 +96,7 @@ void ex0902(void) {
         }
     }
 
-    printf("\n´çÃ· ¹øÈ£´Â %d°³ÀÔ´Ï´Ù.\n", win);
+    printf("\në‹¹ì²¨ ë²ˆí˜¸ëŠ” %dê°œì…ë‹ˆë‹¤.\n", win);
 
 }
 
@@ -112,27 +114,27 @@ void ex0903()
 {
     int number, uwin, cwin;
 
-    initialize(); // ºù°íÆÇ ÃÊ±âÈ­
-    do { //¹İº¹
-        printf("»ç¿ëÀÚ\n"); print_bingo(ubingo); //»ç¿ëÀÚÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù. 
-        number = get_number(0); //»ç¿ëÀÚ°¡ ¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù. 
-        erase_bingo(ubingo, number); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°íÆÇ¿¡¼­ Áö¿î´Ù. 
+    initialize(); // ë¹™ê³ íŒ ì´ˆê¸°í™”
+    do { //ë°˜ë³µ
+        printf("ì‚¬ìš©ì\n"); print_bingo(ubingo); //ì‚¬ìš©ìì˜ ë¹™ê³ íŒì„ ì¶œë ¥í•œë‹¤. 
+        number = get_number(0); //ì‚¬ìš©ìê°€ ë²ˆí˜¸ë¥¼ ì„ íƒí•œë‹¤. 
+        erase_bingo(ubingo, number); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ê°€ í•´ë‹¹ ë²ˆí˜¸ë¥¼ ë¹™ê³ íŒì—ì„œ ì§€ìš´ë‹¤. 
         erase_bingo(cbingo, number);
 
-        number = get_number(1); //ÄÄÇ»ÅÍ°¡ ¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù. 
-        erase_bingo(ubingo, number); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°íÆÇ¿¡¼­ Áö¿î´Ù. 
+        number = get_number(1); //ì»´í“¨í„°ê°€ ë²ˆí˜¸ë¥¼ ì„ íƒí•œë‹¤. 
+        erase_bingo(ubingo, number); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ê°€ í•´ë‹¹ ë²ˆí˜¸ë¥¼ ë¹™ê³ íŒì—ì„œ ì§€ìš´ë‹¤. 
         erase_bingo(cbingo, number);
 
-        uwin = check_bingo(ubingo); //»ç¿ëÀÚ°¡ ºù°í¸¦ ¿Ï¼ºÇß´ÂÁö °Ë»çÇÑ´Ù. 
-        cwin = check_bingo(cbingo); //»ç¿ëÀÚ°¡ ºù°í¸¦ ¿Ï¼ºÇß´ÂÁö °Ë»çÇÑ´Ù. 
-    } while ((uwin == 0) && (cwin == 0)); //¿Ï¼ºÇÏÁö ¾Ê¾Ò´Ù¸é, ¹İº¹. 
+        uwin = check_bingo(ubingo); //ì‚¬ìš©ìê°€ ë¹™ê³ ë¥¼ ì™„ì„±í–ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤. 
+        cwin = check_bingo(cbingo); //ì‚¬ìš©ìê°€ ë¹™ê³ ë¥¼ ì™„ì„±í–ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤. 
+    } while ((uwin == 0) && (cwin == 0)); //ì™„ì„±í•˜ì§€ ì•Šì•˜ë‹¤ë©´, ë°˜ë³µ. 
 
-    printf("»ç¿ëÀÚ\n"); print_bingo(ubingo); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù. 
-    printf("ÄÄÇ»ÅÍ\n"); print_bingo(cbingo);
-    print_winner(cwin * 2 + uwin); //½ÂÀÚ¸¦ Ç¥½ÃÇÑ´Ù. 
+    printf("ì‚¬ìš©ì\n"); print_bingo(ubingo); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ì˜ ë¹™ê³ íŒì„ ì¶œë ¥í•œë‹¤. 
+    printf("ì»´í“¨í„°\n"); print_bingo(cbingo);
+    print_winner(cwin * 2 + uwin); //ìŠ¹ìë¥¼ í‘œì‹œí•œë‹¤. 
 }
 
-void initialize() { // ºù°íÆÇ ÃÊ±âÈ­
+void initialize() { // ë¹™ê³ íŒ ì´ˆê¸°í™”
     srand((unsigned int)time(NULL));
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -158,7 +160,7 @@ void initialize() { // ºù°íÆÇ ÃÊ±âÈ­
     }
 }
 
-void erase_bingo(int arr[][5], int number) { //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°íÆÇ¿¡¼­ Áö¿î´Ù.
+void erase_bingo(int arr[][5], int number) { //ì‚¬ìš©ìì™€ ì»´í“¨í„°ê°€ í•´ë‹¹ ë²ˆí˜¸ë¥¼ ë¹™ê³ íŒì—ì„œ ì§€ìš´ë‹¤.
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             if (arr[i][j] == number) {
@@ -167,7 +169,7 @@ void erase_bingo(int arr[][5], int number) { //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°
         }
     }
 }
-void print_bingo(int arr[][5]) { //»ç¿ëÀÚÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù.
+void print_bingo(int arr[][5]) { //ì‚¬ìš©ìì˜ ë¹™ê³ íŒì„ ì¶œë ¥í•œë‹¤.
     for (int i = 0; i < 5; i++) {
         printf("[");
         for (int j = 0; j < 5; j++) {
@@ -175,14 +177,14 @@ void print_bingo(int arr[][5]) { //»ç¿ëÀÚÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù.
         }printf("]\n");
     }
 }
-void print_winner(int winner) { //½ÂÀÚ¸¦ Ç¥½ÃÇÑ´Ù.
+void print_winner(int winner) { //ìŠ¹ìë¥¼ í‘œì‹œí•œë‹¤.
 
 }
 
-int get_number(int from) { //¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù.
+int get_number(int from) { //ë²ˆí˜¸ë¥¼ ì„ íƒí•œë‹¤.
     int number;
     if (from == 0) {
-        printf("1~25 ±îÁöÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ½Ã¿À:");
+        printf("1~25 ê¹Œì§€ì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì‹œì˜¤:");
         scanf("%d ", &number);
         return number;
     }
@@ -193,7 +195,7 @@ int get_number(int from) { //¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù.
     }
 }
 
-int check_bingo(int arr[][5]) { //»ç¿ëÀÚ°¡ ºù°í¸¦ ¿Ï¼ºÇß´ÂÁö °Ë»çÇÑ´Ù.
+int check_bingo(int arr[][5]) { //ì‚¬ìš©ìê°€ ë¹™ê³ ë¥¼ ì™„ì„±í–ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤.
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             if (arr[i][j] == 0) {
@@ -224,34 +226,34 @@ int count = 0;
 void ex0904() {
     int number, uwin, cwin;
 
-    initialize(); // ºù°íÆÇ ÃÊ±âÈ­
+    initialize(); // ë¹™ê³ íŒ ì´ˆê¸°í™”
 
     do
-    { //¹İº¹
-        printf("»ç¿ëÀÚ\n");
-        print_bingo(ubingo); //»ç¿ëÀÚÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù.
+    { //ë°˜ë³µ
+        printf("ì‚¬ìš©ì\n");
+        print_bingo(ubingo); //ì‚¬ìš©ìì˜ ë¹™ê³ íŒì„ ì¶œë ¥í•œë‹¤.
 
-        number = get_number(0); //»ç¿ëÀÚ°¡ ¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù.
-        erase_bingo(ubingo, number); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°íÆÇ¿¡¼­ Áö¿î´Ù.
+        number = get_number(0); //ì‚¬ìš©ìê°€ ë²ˆí˜¸ë¥¼ ì„ íƒí•œë‹¤.
+        erase_bingo(ubingo, number); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ê°€ í•´ë‹¹ ë²ˆí˜¸ë¥¼ ë¹™ê³ íŒì—ì„œ ì§€ìš´ë‹¤.
         erase_bingo(cbingo, number);
 
-        //ÄÄÇ»ÅÍ°¡ ¹øÈ£¸¦ ³­¼ö¸¦ ¹ß»ıÇÏ¿© ¼±ÅÃ
-        number = get_number(1); //ÄÄÇ»ÅÍ°¡ ¹øÈ£¸¦ ¼±ÅÃÇÑ´Ù.
-        erase_bingo(ubingo, number); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍ°¡ ÇØ´ç ¹øÈ£¸¦ ºù°íÆÇ¿¡¼­ Áö¿î´Ù.
+        //ì»´í“¨í„°ê°€ ë²ˆí˜¸ë¥¼ ë‚œìˆ˜ë¥¼ ë°œìƒí•˜ì—¬ ì„ íƒ
+        number = get_number(1); //ì»´í“¨í„°ê°€ ë²ˆí˜¸ë¥¼ ì„ íƒí•œë‹¤.
+        erase_bingo(ubingo, number); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ê°€ í•´ë‹¹ ë²ˆí˜¸ë¥¼ ë¹™ê³ íŒì—ì„œ ì§€ìš´ë‹¤.
         erase_bingo(cbingo, number);
 
-        uwin = check_bingo(ubingo); //»ç¿ëÀÚ°¡ ºù°í¸¦ ¿Ï¼ºÇß´ÂÁö °Ë»çÇÑ´Ù.
-        cwin = check_bingo(cbingo); //»ç¿ëÀÚ°¡ ºù°í¸¦ ¿Ï¼ºÇß´ÂÁö °Ë»çÇÑ´Ù.
-    } while ((uwin == 0) && (cwin == 0)); //¿Ï¼ºÇÏÁö ¾Ê¾Ò´Ù¸é, ¹İº¹.
+        uwin = check_bingo(ubingo); //ì‚¬ìš©ìê°€ ë¹™ê³ ë¥¼ ì™„ì„±í–ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤.
+        cwin = check_bingo(cbingo); //ì‚¬ìš©ìê°€ ë¹™ê³ ë¥¼ ì™„ì„±í–ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤.
+    } while ((uwin == 0) && (cwin == 0)); //ì™„ì„±í•˜ì§€ ì•Šì•˜ë‹¤ë©´, ë°˜ë³µ.
 
-    printf("»ç¿ëÀÚ\n"); print_bingo(ubingo); //»ç¿ëÀÚ¿Í ÄÄÇ»ÅÍÀÇ ºù°íÆÇÀ» Ãâ·ÂÇÑ´Ù.
-    printf("ÄÄÇ»ÅÍ\n"); print_bingo(cbingo);
-    print_winner(cwin * 2 + uwin); //½ÂÀÚ¸¦ Ç¥½ÃÇÑ´Ù.
+    printf("ì‚¬ìš©ì\n"); print_bingo(ubingo); //ì‚¬ìš©ìì™€ ì»´í“¨í„°ì˜ ë¹™ê³ íŒì„ ì¶œë ¥í•œë‹¤.
+    printf("ì»´í“¨í„°\n"); print_bingo(cbingo);
+    print_winner(cwin * 2 + uwin); //ìŠ¹ìë¥¼ í‘œì‹œí•œë‹¤.
 
     return 0;
-}// ¸ŞÀÎÇÔ¼ö ³¡
+}// ë©”ì¸í•¨ìˆ˜ ë
 
-//ÃÊ±âÈ­ - »ç¿ëÀÚ, ÄÄÇ»ÅÍ ¸ğµÎ, ³­¼ö¸¦ ¹ß»ı½ÃÄÑ¼­ 
+//ì´ˆê¸°í™” - ì‚¬ìš©ì, ì»´í“¨í„° ëª¨ë‘, ë‚œìˆ˜ë¥¼ ë°œìƒì‹œì¼œì„œ 
 void initialize() {
     srand((unsigned int)time(NULL));
     set_rand((int*)ubingo);
@@ -302,10 +304,10 @@ void print_bingo(int arr[][5])
 void print_winner(int winner)
 {
     switch (winner) {
-    case 1: printf("»ç¿ëÀÚ°¡ ÀÌ°å½À´Ï´Ù.\n"); break;
-    case 2: printf("ÄÄÇ»ÅÍ°¡ ÀÌ°å½À´Ï´Ù.\n"); break;
-    case 3: printf("ºñ°å½À´Ï´Ù.\n"); break;
-    default: printf("¹º°¡ ÀÌ»óÇÕ´Ï´Ù.\n"); break;
+    case 1: printf("ì‚¬ìš©ìê°€ ì´ê²¼ìŠµë‹ˆë‹¤.\n"); break;
+    case 2: printf("ì»´í“¨í„°ê°€ ì´ê²¼ìŠµë‹ˆë‹¤.\n"); break;
+    case 3: printf("ë¹„ê²¼ìŠµë‹ˆë‹¤.\n"); break;
+    default: printf("ë­”ê°€ ì´ìƒí•©ë‹ˆë‹¤.\n"); break;
     }
 }
 
@@ -317,7 +319,7 @@ int get_number(int from)
     do {
         retry = 0;
         if (from == 0) {
-            printf("1~25 »çÀÌÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä:");
+            printf("1~25 ì‚¬ì´ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”:");
             scanf("%d", &number);
             if (number < 1 || number > 25)
                 retry = 1;
@@ -338,9 +340,9 @@ int get_number(int from)
     checked[count++] = number;
 
     if (from == 0)
-        printf("»ç¿ëÀÚ°¡ %d¸¦ ¼±ÅÃÇß½À´Ï´Ù.\n", number);
+        printf("ì‚¬ìš©ìê°€ %dë¥¼ ì„ íƒí–ˆìŠµë‹ˆë‹¤.\n", number);
     else
-        printf("ÄÄÇ»ÅÍ°¡ %d¸¦ ¼±ÅÃÇß½À´Ï´Ù.\n", number);
+        printf("ì»´í“¨í„°ê°€ %dë¥¼ ì„ íƒí–ˆìŠµë‹ˆë‹¤.\n", number);
     return number;
 }
 
@@ -388,15 +390,15 @@ void swap(int* a, int* b);
 
 void ex1001(void)
 {
-    int data[SIZE10], n; // µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ ¹è¿­
-    for (n = 0; n < 3; n++) // ¸ğµÎ 3 È¸ ¼öÇà
+    int data[SIZE10], n; // ë°ì´í„°ë¥¼ ì €ì¥í•  ë°°ì—´
+    for (n = 0; n < 3; n++) // ëª¨ë‘ 3 íšŒ ìˆ˜í–‰
     {
         srand((unsigned int)time(NULL));
-        generate_random(data); // ³­¼ö »ı¼º
-        print_array("¿øº»: ", data); // ¿øº» Ãâ·Â
-        selection_sort(data); // ¿À¸§Â÷¼ø Á¤·Ä
-        print_array("Á¤·Ä: ", data); // Á¤·Ä Ãâ·Â
-        printf("\n"); // ÁÙ ¹Ù²Ş Ãâ·Â
+        generate_random(data); // ë‚œìˆ˜ ìƒì„±
+        print_array("ì›ë³¸: ", data); // ì›ë³¸ ì¶œë ¥
+        selection_sort(data); // ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+        print_array("ì •ë ¬: ", data); // ì •ë ¬ ì¶œë ¥
+        printf("\n"); // ì¤„ ë°”ê¿ˆ ì¶œë ¥
     }
 }
 
@@ -433,29 +435,29 @@ void print_array(char* str, int array[]) {
     }
 }
 
-void generate_random(int array[], int size); // ³­¼ö »ı¼º ÇÔ¼ö ¼±¾ğ
-void print_array(char* str, int array[], int size); // ¹è¿­ Ãâ·Â Èû¼ö ¼±¾ğ
+void generate_random(int array[], int size); // ë‚œìˆ˜ ìƒì„± í•¨ìˆ˜ ì„ ì–¸
+void print_array(char* str, int array[], int size); // ë°°ì—´ ì¶œë ¥ í˜ìˆ˜ ì„ ì–¸
 void bubble(int array[], int last);
 void swap(int* a, int* b);
 
 void ex1002(void) {
     int* data, size;
-    srand(time(NULL)); // ³­¼ö ÃÊ±âÈ­
-    printf("¹è¿­ÀÇ Å©±â¸¦ ÀÔ·ÂÇÏ¼¼¿ä: "); // ¹è¿­ÀÇ Å©±â ÀÔ·Â
+    srand(time(NULL)); // ë‚œìˆ˜ ì´ˆê¸°í™”
+    printf("ë°°ì—´ì˜ í¬ê¸°ë¥¼ ì…ë ¥í•˜ì„¸ìš”: "); // ë°°ì—´ì˜ í¬ê¸° ì…ë ¥
     scanf("%d", &size);
 
-    data = (int*)malloc(sizeof(int) * size); // ¹è¿­ µ¿Àû ÇÒ´ç
-    generate_random(data, size); // ³­¼ö »ı¼º
+    data = (int*)malloc(sizeof(int) * size); // ë°°ì—´ ë™ì  í• ë‹¹
+    generate_random(data, size); // ë‚œìˆ˜ ìƒì„±
 
-    print_array("¿øº»: ", data, size); // ¿øº» µ¥ÀÌÅÍ Ãâ·Â
+    print_array("ì›ë³¸: ", data, size); // ì›ë³¸ ë°ì´í„° ì¶œë ¥
 
     printf("\n");
 
-    bubble(data, size); // ¹öºíÁ¤·Ä
-    print_array("Á¤·Ä: ", data, size); // Á¤·Ä µ¥ÀÌÅÍ Ãâ·Â
-    // ÆÄÀÏ¿¡ ÀúÀå
+    bubble(data, size); // ë²„ë¸”ì •ë ¬
+    print_array("ì •ë ¬: ", data, size); // ì •ë ¬ ë°ì´í„° ì¶œë ¥
+    // íŒŒì¼ì— ì €ì¥
 
-    free(data); // ±â¾ïÀåÄ¡ ÇØÁ¦
+    free(data); // ê¸°ì–µì¥ì¹˜ í•´ì œ
 }
 
 void generate_random(int array[], int size) {
@@ -481,8 +483,8 @@ void print_array(char* str, int array[], int size) {
 }
 
 void bubble(int array[], int last) {
-    for (int n = 0; n < last - 1; n++) { //lastÁ÷Àü±îÁö ±³È¯À» ¹İº¹
-        for (int m = 0; m < last - n - 1; m++) { //Å« °ªÀ» Á¦¿ÜÇÑ ³ª¸ÓÁö ¹è¿­¿¡¼­ÀÇ Á¤·Ä
+    for (int n = 0; n < last - 1; n++) { //lastì§ì „ê¹Œì§€ êµí™˜ì„ ë°˜ë³µ
+        for (int m = 0; m < last - n - 1; m++) { //í° ê°’ì„ ì œì™¸í•œ ë‚˜ë¨¸ì§€ ë°°ì—´ì—ì„œì˜ ì •ë ¬
             if (array[m] > array[m + 1])
                 swap(&array[m], &array[m + 1]);
         }
@@ -498,20 +500,20 @@ void swap(int* a, int* b) {
 
 
 #define MAX_SIZE 8
-int sorted[MAX_SIZE]; // Ãß°¡ÀûÀÎ °ø°£ÀÌ ÇÊ¿ä
+int sorted[MAX_SIZE]; // ì¶”ê°€ì ì¸ ê³µê°„ì´ í•„ìš”
 
-// i: Á¤·ÄµÈ ¿ŞÂÊ ¸®½ºÆ®¿¡ ´ëÇÑ ÀÎµ¦½º
-// j: Á¤·ÄµÈ ¿À¸¥ÂÊ ¸®½ºÆ®¿¡ ´ëÇÑ ÀÎµ¦½º
-// k: Á¤·ÄµÉ ¸®½ºÆ®¿¡ ´ëÇÑ ÀÎµ¦½º
-//* 2°³ÀÇ ÀÎÁ¢ÇÑ ¹è¿­ list[left...mid]¿Í list[mid+1...right]ÀÇ ÇÕº´ °úÁ¤ */
-//* (½ÇÁ¦·Î ¼ıÀÚµéÀÌ Á¤·ÄµÇ´Â °úÁ¤) */
+// i: ì •ë ¬ëœ ì™¼ìª½ ë¦¬ìŠ¤íŠ¸ì— ëŒ€í•œ ì¸ë±ìŠ¤
+// j: ì •ë ¬ëœ ì˜¤ë¥¸ìª½ ë¦¬ìŠ¤íŠ¸ì— ëŒ€í•œ ì¸ë±ìŠ¤
+// k: ì •ë ¬ë  ë¦¬ìŠ¤íŠ¸ì— ëŒ€í•œ ì¸ë±ìŠ¤
+//* 2ê°œì˜ ì¸ì ‘í•œ ë°°ì—´ list[left...mid]ì™€ list[mid+1...right]ì˜ í•©ë³‘ ê³¼ì • */
+//* (ì‹¤ì œë¡œ ìˆ«ìë“¤ì´ ì •ë ¬ë˜ëŠ” ê³¼ì •) */
 
 void merge(int list[], int left, int mid, int right) {
     int i, j, k, l;
     i = left;
     j = mid + 1;
     k = left;
-    /* ºĞÇÒÁ¤·ÄµÈ listÀÇ ÇÕº´ */
+    /* ë¶„í• ì •ë ¬ëœ listì˜ í•©ë³‘ */
     while (i <= mid && j <= right) {
         if (list[i] <= list[j])
             sorted[k++] = list[i++];
@@ -519,30 +521,30 @@ void merge(int list[], int left, int mid, int right) {
             sorted[k++] = list[j++];
     }
 
-    // ³²¾Æ ÀÖ´Â °ªµéÀ» ÀÏ°ı º¹»ç
+    // ë‚¨ì•„ ìˆëŠ” ê°’ë“¤ì„ ì¼ê´„ ë³µì‚¬
     if (i > mid) {
         for (l = j; l <= right; l++)
             sorted[k++] = list[l];
     }
-    // ³²¾Æ ÀÖ´Â °ªµéÀ» ÀÏ°ı º¹»ç 
+    // ë‚¨ì•„ ìˆëŠ” ê°’ë“¤ì„ ì¼ê´„ ë³µì‚¬ 
     else {
         for (l = i; l <= mid; l++)
             sorted[k++] = list[l];
     }
-    // ¹è¿­ sorted[](ÀÓ½Ã ¹è¿­)ÀÇ ¸®½ºÆ®¸¦ ¹è¿­ list[]·Î Àçº¹»ç
+    // ë°°ì—´ sorted[](ì„ì‹œ ë°°ì—´)ì˜ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°°ì—´ list[]ë¡œ ì¬ë³µì‚¬
     for (l = left; l <= right; l++) {
         list[l] = sorted[l];
     }
 }
-// ÇÕº´ Á¤·Ä
+// í•©ë³‘ ì •ë ¬
 void merge_sort(int list[], int left, int right) {
     int mid;
     if (left < right) {
-        // Áß°£ À§Ä¡¸¦ °è»êÇÏ¿© ¸®½ºÆ®¸¦ ±Õµî ºĞÇÒ -ºĞÇÒ(Divide)
+        // ì¤‘ê°„ ìœ„ì¹˜ë¥¼ ê³„ì‚°í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ë¥¼ ê· ë“± ë¶„í•  -ë¶„í• (Divide)
         mid = (left + right) / 2;
-        merge_sort(list, left, mid); // ¾ÕÂÊ ºÎºĞ ¸®½ºÆ® Á¤·Ä -Á¤º¹(Conquer) 
-        merge_sort(list, mid + 1, right); // µÚÂÊ ºÎºĞ ¸®½ºÆ® Á¤·Ä -Á¤º¹(Conquer)
-        // Á¤·ÄµÈ 2°³ÀÇ ºÎºĞ ¹è¿­À» ÇÕº´ÇÏ´Â °úÁ¤ -°áÇÕ(Combine) 
+        merge_sort(list, left, mid); // ì•ìª½ ë¶€ë¶„ ë¦¬ìŠ¤íŠ¸ ì •ë ¬ -ì •ë³µ(Conquer) 
+        merge_sort(list, mid + 1, right); // ë’¤ìª½ ë¶€ë¶„ ë¦¬ìŠ¤íŠ¸ ì •ë ¬ -ì •ë³µ(Conquer)
+        // ì •ë ¬ëœ 2ê°œì˜ ë¶€ë¶„ ë°°ì—´ì„ í•©ë³‘í•˜ëŠ” ê³¼ì • -ê²°í•©(Combine) 
         merge(list, left, mid, right);
     }
 }
@@ -551,9 +553,9 @@ void ex1003() {
     int i;
     int n = MAX_SIZE;
     int list[8] = { 21, 10, 12, 20, 25, 13, 15, 22 };
-    // ÇÕº´ Á¤·Ä ¼öÇà(left: ¹è¿­ÀÇ ½ÃÀÛ = 0, right: ¹è¿­ÀÇ ³¡ = 7)
+    // í•©ë³‘ ì •ë ¬ ìˆ˜í–‰(left: ë°°ì—´ì˜ ì‹œì‘ = 0, right: ë°°ì—´ì˜ ë = 7)
     merge_sort(list, 0, n - 1);
-    // Á¤·Ä °á°ú Ãâ·Â
+    // ì •ë ¬ ê²°ê³¼ ì¶œë ¥
     for (i = 0; i < n; i++) {
         printf("%d\n", list[i]);
     }
@@ -565,9 +567,9 @@ void ex1101(void)
     int c;
     fp = fopen("sample.txt", "r");
     if (fp == NULL)
-        printf("ÆÄÀÏ ¿­±â ½ÇÆĞ\n");
+        printf("íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨\n");
     else
-        printf("ÆÄÀÏ ¿­±â ¼º°ø\n");
+        printf("íŒŒì¼ ì—´ê¸° ì„±ê³µ\n");
 
     while ((c = fgetc(fp)) != EOF)
         putchar(c);
@@ -580,14 +582,14 @@ void ex1102(void)
     int buffer[SIZE] = { 10, 20, 30, 40, 50 };
     FILE* fp = NULL;
 
-    fp = fopen("binary.bin", "wb"); // ¨ç
+    fp = fopen("binary.bin", "wb"); // â‘ 
     if (fp == NULL)
     {
-        fprintf(stderr, "binary.bin ÆÄÀÏÀ»¿­¼ö¾ø½À´Ï´Ù.");
+        fprintf(stderr, "binary.bin íŒŒì¼ì„ì—´ìˆ˜ì—†ìŠµë‹ˆë‹¤.");
         return 1;
     }
 
-    fwrite(buffer, sizeof(int), SIZE, fp); // ¨è
+    fwrite(buffer, sizeof(int), SIZE, fp); // â‘¡
 
     for (i = 0; i < SIZE; i++)
         printf("%d ", buffer[i]);
@@ -595,13 +597,13 @@ void ex1102(void)
     fclose(fp);
 }
 
-void generate_random(int* array, int size)	// ³­¼ö »ı¼º ÇÔ¼ö ¼±¾ğ
+void generate_random(int* array, int size)	// ë‚œìˆ˜ ìƒì„± í•¨ìˆ˜ ì„ ì–¸
 {
     int n;
     for (n = 0; n < size; n++)
         array[n] = (rand() % 1000) + 1;
 }
-void print_array(FILE* fp, char* str, int* array, int size)// ¹è¿­ Ãâ·Â Èû¼ö ¼±¾ğ
+void print_array(FILE* fp, char* str, int* array, int size)// ë°°ì—´ ì¶œë ¥ í˜ìˆ˜ ì„ ì–¸
 {
     int n;
     fprintf(fp, "%s %d\n", str, size);
@@ -617,12 +619,12 @@ void save_data(int array[], int size) {
     FILE* fp;
     fp = fopen("sorted.txt", "w");
     if (fp != NULL) {
-        print_array(fp, "Á¤·Ä:", array, size);
+        print_array(fp, "ì •ë ¬:", array, size);
         fclose(fp);
     }
 }
 
-void swap(int* x, int* y)	// µÎ ¼ö¸¦ ¹Ù²Ù´Â ÇÔ¼ö ¼±¾ğ
+void swap(int* x, int* y)	// ë‘ ìˆ˜ë¥¼ ë°”ê¾¸ëŠ” í•¨ìˆ˜ ì„ ì–¸
 {
     int temp;
     temp = *x;
@@ -631,8 +633,8 @@ void swap(int* x, int* y)	// µÎ ¼ö¸¦ ¹Ù²Ù´Â ÇÔ¼ö ¼±¾ğ
 }
 
 void bubble(int array[], int last) {
-    for (int n = 0; n < last - 1; n++) { //lastÁ÷Àü±îÁö ±³È¯À» ¹İº¹
-        for (int m = 0; m < last - n - 1; m++) { //Å« °ªÀ» Á¦¿ÜÇÑ ³ª¸ÓÁö ¹è¿­¿¡¼­ÀÇ Á¤·Ä
+    for (int n = 0; n < last - 1; n++) { //lastì§ì „ê¹Œì§€ êµí™˜ì„ ë°˜ë³µ
+        for (int m = 0; m < last - n - 1; m++) { //í° ê°’ì„ ì œì™¸í•œ ë‚˜ë¨¸ì§€ ë°°ì—´ì—ì„œì˜ ì •ë ¬
             if (array[m] > array[m + 1])
                 swap(&array[m], &array[m + 1]);
         }
@@ -640,31 +642,439 @@ void bubble(int array[], int last) {
 }
 
 void ex1103() {
-    int* data = NULL, size = 0;  // º¯¼ö 
+    int* data = NULL, size = 0;  // ë³€ìˆ˜ 
     int index, key = 1;
-    char temp[20];               // ÆÄÀÏ ÀĞ±â¿¡ ÇÊ¿äÇÑ º¯¼ö
+    char temp[20];               // íŒŒì¼ ì½ê¸°ì— í•„ìš”í•œ ë³€ìˆ˜
     int n;
     char* fpath = "sorted.txt";
-    FILE* fp = fopen(fpath, "r"); // ÆÄÀÏ Æ÷ÀÎÅÍ ¼±¾ğ ¹× ÆÄÀÏ ¿­±â
+    FILE* fp = fopen(fpath, "r"); // íŒŒì¼ í¬ì¸í„° ì„ ì–¸ ë° íŒŒì¼ ì—´ê¸°
 
-    if (fp != NULL) {    // ÆÄÀÏÀ» ¼º°øÀûÀ¸·Î ¿­¾ú´Ù¸é
-        fscanf(fp, "%s %d", temp, &size); // ¡°¿øº»:¡±°ú µ¥ÀÌÅÍ Å©±â¸¦ ÀĞ´Â´Ù
+    if (fp != NULL) {    // íŒŒì¼ì„ ì„±ê³µì ìœ¼ë¡œ ì—´ì—ˆë‹¤ë©´
+        fscanf(fp, "%s %d", temp, &size); // â€œì›ë³¸:â€ê³¼ ë°ì´í„° í¬ê¸°ë¥¼ ì½ëŠ”ë‹¤
         if (size != 0) {
-            data = (int*)malloc(sizeof(int) * size); // ¹è¿­À» µ¿ÀûÀ¸·Î ÇÒ´çÇÑ´Ù
-            for (n = 0; n < size; n++) // µ¥ÀÌÅÍ¸¦ ÀĞ´Â´Ù
+            data = (int*)malloc(sizeof(int) * size); // ë°°ì—´ì„ ë™ì ìœ¼ë¡œ í• ë‹¹í•œë‹¤
+            for (n = 0; n < size; n++) // ë°ì´í„°ë¥¼ ì½ëŠ”ë‹¤
                 fscanf(fp, "%d", &data[n]);
         }
-        fclose(fp); // ÆÄÀÏÀ» ´İ´Â´Ù
+        fclose(fp); // íŒŒì¼ì„ ë‹«ëŠ”ë‹¤
     }
     else
-        printf("ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        printf("íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 
-    print_array(stdout, "¿øº»: ", data, size);
+    print_array(stdout, "ì›ë³¸: ", data, size);
     while (key > 0) {
-        printf("°Ë»öÇÒ ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä: "); // »ç¿ëÀÚÀÇ ÀÔ·ÂÀ» ¹Ş´Â´Ù. 
+        printf("ê²€ìƒ‰í•  ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: "); // ì‚¬ìš©ìì˜ ì…ë ¥ì„ ë°›ëŠ”ë‹¤. 
         scanf("%d", &key);
-        if (key > 0) {  // key¸¦ Å½»öÇÏ°í °á°ú¸¦ Ãâ·ÂÇÑ´Ù. // ÃßÈÄ ±¸Çö
-            printf("%d¸¦ Å½»öÇÕ´Ï´Ù.\n", key);
+        if (key > 0) {  // keyë¥¼ íƒìƒ‰í•˜ê³  ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤. // ì¶”í›„ êµ¬í˜„
+            printf("%dë¥¼ íƒìƒ‰í•©ë‹ˆë‹¤.\n", key);
         }
-    } printf("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.\n\n");
+    } printf("í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\n\n");
+}
+
+void ex1201(void) {
+    char str[80];
+    float f;
+    FILE* pFile;
+
+    pFile = fopen("myfile.txt", "r"); // myfile.txtë¥¼ ì½ê¸° ëª¨ë“œë¡œ ì—´ê¸°
+    fscanf(pFile, "%f", &f); // íŒŒì¼ì—ì„œ ì‹¤ìˆ˜ë¥¼ ì½ëŠ”ë‹¤. 
+    fscanf(pFile, "%s", str); // íŒŒì¼ì—ì„œ ë¬¸ìì—´ì„ 
+    fclose(pFile); // íŒŒì¼ì„ ë‹«ëŠ”ë‹¤.
+    printf("I have read: %f and %s\n", f, str); // ì½ì€ ë°ì´í„°ë¥¼ ì¶œë ¥í•œ
+}
+
+void generate_random(int* array, int size)	// ë‚œìˆ˜ ìƒì„± í•¨ìˆ˜ ì„ ì–¸
+{
+    int n;
+    for (n = 0; n < size; n++)
+        array[n] = (rand() % 1000) + 1;
+}
+void print_array(char* str, int* array, int size)	// ë°°ì—´ ì¶œë ¥ í˜ìˆ˜ ì„ ì–¸
+{
+    int n;
+    printf("%s %d\n", str, size);
+    for (n = 0; n < size; n++)
+        printf("%5d", array[n]);
+    printf("\n");
+}
+
+void swap(int* x, int* y)	// ë‘ ìˆ˜ë¥¼ ë°”ê¾¸ëŠ” í•¨ìˆ˜ ì„ ì–¸
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+void bubble(int array[], int last)
+{
+    int m;
+    for (m = 0; m < last; m++)
+        if (array[m] > array[m + 1])
+            swap(&array[m], &array[m + 1]);
+}
+void bubble_sort(int array[], int size)	// í•¨ìˆ˜ êµ¬í˜„
+{
+    int n;
+    for (n = 0; n < size - 1; n++)		// array[0] ~ array[sizeâ€“nâ€“1] ì¤‘ì—ì„œ
+        bubble(array, size - n - 1);	// ê°€ì¥ í° ê°’ì„ array[size-n-1]ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
+}
+void print_array1(FILE* fp, char* str, int array[], int size)	// íŒŒë¼ë¯¸í„° FILE * ì¶”ê°€
+{
+    int n;
+    fprintf(fp, "%s %d\n", str, size);		// printf(â€¦)ë¥¼ fprintf(fp, â€¦)ë¡œ ìˆ˜ì •í•œë‹¤.
+    for (n = 0; n < size; n++)
+    {
+        fprintf(fp, "%5d", array[n]);		// printf(â€¦)ë¥¼ fprintf(fp, â€¦)ë¡œ ìˆ˜ì •í•œë‹¤.
+        if ((n + 1) % 10 == 0)
+            fprintf(fp, "\n");		// printf(â€¦)ë¥¼ fprintf(fp, â€¦)ë¡œ ìˆ˜ì •í•œë‹¤.
+    }
+    fprintf(fp, "\n");			// printf(â€¦)ë¥¼ fprintf(fp, â€¦)ë¡œ ìˆ˜ì •í•œë‹¤.
+}
+void save_data(int array[], int size)
+{
+    FILE* fp;			// íŒŒì¼ í¬ì¸í„°ë¥¼ ì„ ì–¸í•œë‹¤.
+    fp = fopen("sorted.txt", "w");	// í…ìŠ¤íŠ¸ íŒŒì¼ì„ ì“°ê¸° ëª¨ë“œë¡œ ì—°ë‹¤.
+    if (fp != NULL)		// íŒŒì¼ ì—´ê¸°ì— ì„±ê³µí•˜ì˜€ë‹¤ë©´,
+    {
+        print_array1(fp, "ì •ë ¬: ", array, size);	// íŒŒì¼ì„ ì‚¬ìš©í•˜ê³ 
+        fclose(fp);			// íŒŒì¼ì„ ë‹«ëŠ”ë‹¤.
+    }
+}
+
+int linear_search(int array[], int size, int key) {
+    int n;
+    for (n = 0; n < size; n++) {
+        if (key == array[n]) //ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´
+            return n;
+        if (key < array[n]) //ë°°ì—´ì˜ ì›ì†Œê°€ í‚¤ ë³´ë‹¤ í¬ë©´
+            break;
+    }return -1; //ì°¾ì§€ ëª»í–ˆìœ¼ë©´
+}
+
+int binary_search(int array[], int size, int key) {
+    int low, high, center;
+    low = 0;
+    high = size - 1;
+
+    while (low <= high) {
+        center = (low + high) / 2;
+        if (key == array[center])
+            return center;
+        else if (key > array[center])
+            low = center + 1;
+        else
+            high = center - 1;
+    }return -1;
+}
+int* read_data1(int* arrsize) {
+    int* array = NULL, size = 0;
+    array = malloc(size);
+    *arrsize = size;
+    return array;
+}
+
+void ex1202(void)
+{
+    int* data = NULL, size = 0; // ë³€ìˆ˜ ìˆ˜ì • ë° ì´ˆê¸°í™”
+    int index, key = 1;
+    char temp[20]; // íŒŒì¼ ì½ê¸°ì— í•„ìš”í•œ ë³€ìˆ˜
+
+    int n;
+    char* fpath = "sorted.txt";
+    FILE* fp = fopen(fpath, "r"); // íŒŒì¼ í¬ì¸í„° ì„ ì–¸ ë° íŒŒì¼ ì—´ê¸°
+    if (fp != NULL) // íŒŒì¼ì„ ì„±ê³µì ìœ¼ë¡œ ì—´ì—ˆë‹¤ë©´
+    {
+        fscanf(fp, "%s %d", temp, &size); // â€œì›ë³¸:â€ê³¼ ë°ì´í„° í¬ê¸°ë¥¼ ì½ëŠ”ë‹¤.
+        if (size != 0)
+        {
+            data = (int*)malloc(sizeof(int) * size); // ë°°ì—´ì„ ë™ì ìœ¼ë¡œ í• ë‹¹í•œë‹¤.
+            for (n = 0; n < size; n++) // ë°ì´í„°ë¥¼ ì½ëŠ”ë‹¤.
+                fscanf(fp, "%d", &data[n]);
+            print_array1(stdout, "ì •ë ¬", data, size);
+        }
+
+    }
+    else
+        printf("íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+
+    printf("ê²€ìƒ‰í•  ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”:");
+    scanf("%d", &key);
+
+    if (key > 0) {
+        //index = linear_search(data, size, key); // ì„ í˜•íƒìƒ‰
+        index = binary_search(data, size, key); //ì´ì§„íƒìƒ‰
+        if (index != -1) //ë°œê²¬
+            printf("ë°ì´í„°ê°€ %d ë²ˆì§¸ì— ìˆìŠµë‹ˆë‹¤.\n", index + 1);
+        else //ë°œê²¬X
+            printf("ë°ì´í„°ê°€ íŒŒì¼ì— ì—†ìŠµë‹ˆë‹¤.\n");
+    }
+    else
+        fclose(fp); // íŒŒì¼ì„ ë‹«ëŠ”ë‹¤.
+
+    if (data != NULL) // ê¸°ì–µì¥ì†Œë¥¼ ë™ì ìœ¼ë¡œ í• ë‹¹í•˜ë¯€ë¡œ
+        free(data); // í•´ì œí•œë‹¤. 
+}
+
+
+#define MAXLENGTH 100 // ë‹¨ì–´ ìµœëŒ€ ê¸¸ì´
+#define MAXWORD 100 //ë‹¨ì–´ ìµœëŒ€ ìˆ˜
+void get_words();
+void sort_string();
+void print_words();
+void deallocate();
+
+char* pstrarray[MAXWORD]; //ë‹¨ì–´ë¥¼ ì €ì¥í•  ë¬¸ì í¬ì¸í„° ë°°ì—´
+int nword; //ë‹¨ì–´ 
+
+void ex1204() {
+    get_words(); //ì‚¬ìš©ìì—ê²Œ ë‹¨ì–´ë¥¼ ì…ë ¥ ë°›ì•„ ì €ì¥í•œë‹¤.
+    sort_string(); //ë‹¨ì–´ë¥¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•œë‹¤.
+    print_words(); //ì •ë ¬ëœ ë‹¨ì–´ë¥¼ ì¶œë ¥í•œë‹¤.
+    deallocate(); //í• ë‹¹ë°›ì€ ê³µê°„ì„ í•´ì œí•œë‹¤.
+}
+
+void get_words() {
+    char buffer[100], * temp;// ì‚¬ìš©ìê°€ ì…ë ¥í•œ ë¬¸ìì—´ ì €ì¥, ê¸°ì–µ ê³µê°„ í• ë‹¹ìš©
+    int size; // ë°›ì€ ë¬¸ìì—´ì˜ ê¸¸ì´
+
+    nword = 0; // ì „ì—­ ë³€ìˆ˜ ì´ˆê¸°
+    printf("ë‹¨ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”. ìµœëŒ€ ë‹¨ì–´ ìˆ˜ëŠ” 100 ê°œ ì…ë‹ˆë‹¤.\n"); // ì•ˆë‚´ë¬¸ ì¶œë ¥
+    printf("ì…ë ¥ì„ ì¤‘ì§€í•˜ë ¤ë©´ ì—”í„°ë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n\n");
+    while (nword < MAXWORD) {
+        printf("%d. ë‹¨ì–´ ì…ë ¥: ", nword + 1); // ì•ˆë‚´ë¬¸ ì¶œë ¥
+        gets(buffer); // ë¬¸ìì—´ ì…ë ¥
+        if (strcmp(buffer, "") == 0) // ì—”í„°í‚¤ë¥¼ ì…ë ¥í•˜ì˜€ë‹¤ë©´
+            break; // ë°˜ë³µë¬¸ì„ ë²—ì–´ë‚˜ì„œ, í•¨ìˆ˜ ì¢…ë£Œ
+        else // ë‹¨ì–´ë¥¼ ì…ë ¥í•˜ì˜€ë‹¤ë©´
+        {
+            size = strlen(buffer) + 1; // ë‹¨ì–´ì˜ í¬ê¸°ë¥¼ êµ¬í•˜ê³ 
+            temp = (char*)malloc(size); // ê¸°ì–µ ê³µê°„ì„ í• ë‹¹í•˜ê³ 
+            strcpy(temp, buffer); // ë‹¨ì–´ë¥¼ ë³µì‚¬í•˜ì—¬
+            pstrarray[nword++] = temp; // í¬ì¸í„° ë°°ì—´ì— ì—°ê²°í•œë‹¤. 
+        }
+    }
+}
+
+void deallocate() {
+    int n;
+    for (n = 0; n < nword; n++) //nwordê¹Œì§€
+        if (pstrarray[n] != NULL) //ë¬¸ìì—´ì´ ì—°ê²°ë˜ì–´ ìˆë‹¤ë©´
+            free(pstrarray[n]); //ê¸°ì–µ ê³µê°„ì„ í•´ì œí•œë‹¤.
+}
+
+void print_words() {
+    int n;
+    printf("\nì •ë ¬ í›„ ì¶œë ¥: ë‹¨ì–´ ìˆ˜=%d\n", nword);
+    for (n = 0; n < nword; n++)
+        puts(pstrarray[n]);
+}
+
+void sort_string() { // selection_sort(int array[]) ë³µì‚¬í•˜ì—¬ ìˆ˜ì •í•œë‹¤
+    int n, m, minindex;
+    char* temp; // ë¬¸ìì—´ì„ êµì²´í•˜ê¸° ìœ„í•˜ì—¬ ì„ì‹œ ë³€ìˆ˜ë¥¼ ì¶”ê°€í•œë‹¤.
+    for (n = 0; n < nword - 1; n++) {
+        minindex = n;
+        for (m = n; m < nword; m++)
+            if (strcmp(pstrarray[minindex], pstrarray[m]) > 0)
+                minindex = m;
+        temp = pstrarray[minindex];
+        pstrarray[minindex] = pstrarray[n];
+        pstrarray[n] = temp;
+    }
+}
+
+//#include <stdlib.h> // malloc(),free()
+//#include <string.h> // memset()
+//#include <ctype.h> // tolower()
+#define MAXWORD 1000 //íŒŒì¼ì— ë“¤ì–´ ìˆëŠ” ë‹¨ì–´ì˜ ìµœëŒ€ ìˆ˜
+
+void intialize();
+void read_file();
+void print_words();
+void deallocate();
+
+void convert_lower(char* str);
+int linear_search(int* key, int* found);
+void move_downward(int index);
+void insert_data(int index, char* str);
+
+struct WORDCOUNT {     //ë‹¨ì–´ë¥¼ ì €ì¥í•  êµ¬ì¡°ì²´ ì„ ì–¸
+    char* str;          //ë‹¨ì–´ë¥¼ ì €ì¥í•  ë¬¸ìí˜• í¬ì¸í„°
+    int count;          //ë‹¨ì–´ê°€ ë‚˜íƒ€ë‚œ íšŸìˆ˜
+};
+
+struct WORDCOUNT* words; //ë‹¨ì–´ë¥¼ ì €ì¥í•  ë°°ì—´(í¬ì¸í„°)
+int nwords;              //ë°°ì—´ì— ì €ì¥ë˜ì–´ ìˆëŠ” ë‹¨ì–´ ìˆ˜
+
+void ex1301(void) {
+    intialize();   // êµ¬ì¡°ì œ ë°°ì—´ì„ í• ë‹¹í•˜ê³  ì´ˆê¸°í™” í•œë‹¤
+    read_file();   // íŒŒì¼ì—ì„œ ë‹¨ì–´ë¥¼ ì¶”ì¶œí•˜ì—¬ words[]ì— ì €ì¥í•œ
+    print_words();  // words[]ì— ì €ì¥ë˜ì–´ ìˆëŠ” ë‹¨ì–´ì™€ íšŸìˆ˜
+    deallocate();  // ë™ì ìœ¼ë¡œ í• ë‹¹ ë°›ì€ ê¸°ì–µì¥ì†Œë¥¼ í•´ì œí•œ
+}
+
+void intialize() {
+    words = (struct WORDCOUNT*)malloc(sizeof(struct WORDCOUNT) * MAXWORD); //êµ¬ì¡°ì²´ ë°°ì—´
+    memset(words, 0, sizeof(struct WORDCOUNT) * MAXWORD); //ë©”ëª¨ë¦¬ì— íŠ¹ì •ê°’ ì„¸íŒ…
+    nwords = 0;  //ì €ì¥ëœ ë‹¨ì–´ ìˆ˜ = 0
+}
+
+void read_file() {
+    char buffer[256];  //í•œê°œì˜ ë¼ì¸ì„ ì½ëŠ” ì €ì¥ì†Œ
+    FILE* fp = fopen("programming.txt", "r");  //ì½ê¸°ëª¨ë“œë¡œ íŒŒì¼ì—´ê¸°
+    char* token;
+    int found, index; //íƒìƒ‰ì„ ìœ„í•œ ë³€ìˆ˜
+
+    while (fgets(buffer, 256, fp) != NULL) { //í•œì¤„ì„ ì½ì—ˆìœ¼ë©´
+        token = strtok(buffer, " ,.!?\t\n"); //ì²«ë²ˆì§¸ í† í° ë¶„ë¦¬
+        while (token != NULL) {
+            convert_lower(token); //ë‹¨ì–´->ì†Œë¬¸ì ë³€í™˜
+            index = linear_search(token, &found); //ë‹¨ì–´ ì¡´ì¬ ê²€ì‚¬
+            if (found == 1)
+                words[index].count += 1;
+            else {
+                move_downward(index);    //ë‹¨ì–´ë¥¼ í•œ ì¹¸ì”© ì•„ë˜ë¡œ ìšºê¸°ê³ 
+                insert_data(index, token); //í•´ë‹¹ ìœ„ì¹˜ì— ë‹¨ì–´ë¥¼ ì¶”ê°€í•œë‹¤.
+            }
+            printf("%s\n", token); //ì¶”ì¶œëœ ë‹¨ì–´ ì¶œë ¥
+            token = strtok(NULL, " ,.?!\t\n"); //ë‹¤ìŒ í† í°ì„ ì¶”ì¶œ
+        }
+
+    }
+    fclose(fp); //íŒŒì¼ì„ ë‹«ëŠ”ë‹¤.
+}
+
+void print_words() {
+    int n;
+    for (n = 0; n < nwords; n++) {
+        printf("%3d.%-18s:%d\n", n + 1, words[n].str, words[n].count);
+    }
+}
+
+void deallocate() {
+    for (int n = 0; n < nwords; n++) //ì €ì¥ë˜ì–´ ìˆëŠ” ë‹¨ì–´ì— ëŒ€í•´ì„œ
+        if (words[n].str != NULL) //ê¸°ì–µì¥ì†Œê°€ í• ë‹¹ë˜ì—ˆë‹¤ë©´
+            free(words[n].str);  //êµ¬ì¡°ì²´ ë°°ì—´ì„ í•´ì œ
+}
+
+void convert_lower(char* str) {
+    while (*str != NULL) {
+        *str = tolower(*str); //ì†Œë¬¸ìë¡œ ë³€í™˜
+        str++;
+    }
+}
+
+int linear_search(int* key, int* found) {
+    int n, compare;
+    *found = 0;  //ì°¾ì§€ ëª»í–ˆë‹¤ê³  ê°€ì •.
+    for (n = 0; n < nwords; n++) {
+        compare = strcmp(key, words[n].str); //ë¬¸ìì—´ë¹„êµ
+        if (compare == 0) { //ì°¾ì•˜ë‹¤ë©´
+            *found = 1; //ì°¾ì•˜ë‹¤ê³  í‘œì‹œ
+            break;
+        }
+        if (compare < 0)  //ë°°ì—´ì˜ ë‹¨ì–´ê°€ í‚¤ ë³´ë‹¤ í¬ë©´
+            break;
+    }return n; //ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´.
+}
+
+void move_downward(int index) {
+    int n;
+    if (nwords < MAXWORD - 1) { //ë‹¨ì–´ìˆ˜ê°€ ë°°ì—´ì˜ ìµœëŒ€ ìˆ˜ë¥¼ ì´ˆê³¼í•˜ì§€ ì•Šìœ¼ë©´
+        for (n = nwords; n >= index; n--) {  //ë§ˆì§€ë§‰ ë‹¨ì–´ë¶€í„°
+            words[n + 1].str = words[n].str; //ë‹¨ì–´ë¥¼ ìšºê¸´ë‹¤.
+            words[n + 1].count = words[n].count;  //ë‹¨ì–´ ìˆ˜ë¥¼ ìšºê¸´ë‹¤.
+            // words[n+1] = words[n]; // êµ¬ì¡°ì²´ ë©¤ë²„ë¥¼ í•œ ë²ˆì— ìšºê¸´ë‹¤.
+        }
+    }
+}
+
+
+void insert_data(int index, char* str) {
+    int size; //ë‹¨ì–´ì˜ ë¬¸ì ìˆ˜
+    if (nwords < MAXWORD - 1) {
+        size = strlen(str) + 1;
+        words[index].str = (char*)malloc(size);
+        strcpy(words[index].str, str);
+        words[index].count = 1;
+        nwords++;
+    }
+}
+
+
+
+typedef struct STUDENT_INFO SINFO;
+void insert_node(SINFO* student);
+
+
+void get_strudentinfo();
+void print_list();
+void delete_list();
+
+struct STUDENT_INFO {
+    char id[16];
+    char name[16];
+    int score;
+    struct STUDENT_INFO* next;
+};
+
+SINFO* listhead = NULL;
+
+int main() {
+    get_strudentinfo();
+    print_list();
+}
+
+void get_strudentinfo() {
+    SINFO student;
+    printf("í•™ìƒ ì •ë³´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n");
+    printf("ì…ë ¥ì„ ë§ˆì¹˜ë ¤ë©´ í•™ë²ˆì— -1ì„ ë„£ìœ¼ì„¸ìš”.\n\n");
+    while (1) {
+        printf("í•™ë²ˆ: ");
+        scanf("%s", student.id);
+        if (strcmp(student.id, "-1") != 0) {
+            printf("ì´ë¦„: ");
+            scanf("%s", student.name);
+            printf("ì„±ì : ");
+            scanf("%d", &student.score);
+            insert_node(&student);
+            printf("\n");
+        }
+        else
+            break;
+    }
+    delete_list();
+}
+
+void insert_node(SINFO* student) {
+    SINFO* temp = (SINFO*)malloc(sizeof(SINFO)); //ë™ì ìœ¼ë¡œ ë…¸ë“œìƒì„±
+    strcpy(temp->id, student->id);  //í•™ìƒ ë°ì´í„°ë¥¼ ë³µì‚¬
+    strcpy(temp->name, student->name);
+    temp->score = student->score;
+
+    temp->next = listhead;  //ë¦¬ìŠ¤íŠ¸ì˜ ì•ì— ì‚½ì….
+    listhead = temp;
+}
+
+void print_list() {
+    SINFO* search; //ì—°ê²°ë¦¬ìŠ¤íŠ¸ë¥¼ ì¶”ì í•˜ê¸° ìœ„í•œ í¬ì¸í„°
+    search = listhead; //í¬ì¸í„° ì´ˆê¸°í™”
+    printf("\n%16s%16s%6s\n", "í•™ë²ˆ", "ì´ë¦„", "ì„±ì ");
+    printf("======================================\n");
+    while (search != NULL) {
+        printf("%16s", search->id); // ë°ì´í„°ë¥¼ ì¶œë ¥í•˜ê³ 
+        printf("%16s", search->name);
+        printf("%6d\n", search->score);
+        search = search->next; // ë‹¤ìŒ ë…¸ë“œë¡œ ì´ë™í•œë‹¤
+    }
+}
+
+
+void delete_list() {
+    SINFO* temp = listhead; //tempë¥¼ ì´ˆê¸°í™”
+    while (listhead != NULL) {  //ì—°ê²°ë¦¬ìŠ¤íŠ¸ì˜ ëì— ë„ë‹¬í•  ë•Œê¹Œì§€
+        listhead = listhead->next; //ë¦¬ìŠ¤íŠ¸ í—¤ë“œë¥¼ ë‹¤ìŒ ë…¸ë“œë¡œ ìšºê¸°ê³ 
+        free(temp); //tempê°€ ê°€ë¦¬í‚¤ëŠ” ë…¸ë“œë¥¼ í•´ì œí•œë‹¤.
+        temp = listhead; //tempë¥¼ ìˆ˜ì •í•œë‹¤.
+    }
 }
