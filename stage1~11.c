@@ -325,3 +325,150 @@ void ex0410() {
 }
 
 //stage 5
+void ex0501() {
+    char words[1000];
+    int count;
+
+    scanf("%s", words);
+    scanf("%d", &count);
+    printf("%c", words[count - 1]);
+}
+
+void ex0502() {
+    char s[100];
+    int count = 0;
+    scanf("%s", s);
+    for (int i = 0; i < 100; i++) {
+        if (s[i] == '\0')
+            break;
+        count++;
+    }
+    printf("%d", count);
+}
+
+void ex0503() {
+    int n;
+    char a[100];
+
+    scanf("%d", &n);
+
+    while (n--) {
+        scanf("%s", a);
+        printf("%c%c \n", a[0], a[strlen(a) - 1]);
+    }
+}
+
+void ex0504() {
+    char n;
+    scanf("%s", &n);
+    printf("%d", n);
+}
+
+//공백 없는 숫자 더하기
+void ex11720() {
+    int n, sum = 0;
+    char arr[100];
+
+    scanf("%d", &n);
+    scanf("%s", arr);
+    for (int i = 0; i < n; i++) {
+        sum += arr[i] - '0';
+    }printf("%d", sum);
+}
+
+//알파벳 찾기
+void ex10809() {
+    char arr[100];
+    int index[26] = { 0 };
+    scanf("%s", arr);
+
+    for (int i = 0; i < strlen(arr); i++) {
+        if (index[arr[i] - 'a'] == 0) index[arr[i] - 'a'] = i + 1;
+    }
+    for (int k = 0; k < 26; k++) {
+        if (index[k] == 0) printf("-1 ");
+        else printf("%d ", index[k] - 1); //출력 
+    }
+}
+
+//그대로 출력하기
+void ex11718() {
+    char a;
+    while (scanf("%c", &a) == 1) {
+        printf("%c", a);
+    }
+}
+
+//문자열 반복
+void ex2675() {
+    int n, cnt = 0;
+    char arr[20];
+    scanf("%d", &n);
+
+    for (int k = 0; k < n; k++) {
+        scanf("%d %s", &cnt, arr);
+
+        for (int i = 0; i < strlen(arr); i++) {
+            for (int j = 0; j < cnt; j++) {
+                printf("%c", arr[i]);
+            }
+        }printf("\n");
+    }
+}
+
+//단어의 개수
+void ex1152() {
+    char word[1000000];
+    int count = 0, len;
+
+    scanf("%[^\n]s", word);
+    len = strlen(word);
+
+    if (len == 1 && word[0] == ' ') {
+        printf("%d", count);
+        //return 0;
+    }
+    for (int i = 0; i < len; i++) {
+        if (word[i] == ' ') {
+            count++;
+        }
+    }
+    printf("%d", count + 1);
+}
+
+//상수 2908번
+
+void ex2908() {
+    char a[5], b[5];
+    int num1, num2;
+    scanf("%s %s", a, b);
+    char temp;
+    temp = a[0]; a[0] = a[2]; a[2] = temp;
+    temp = b[0]; b[0] = b[2]; b[2] = temp;
+
+    if (atoi(a) > atoi(b))     //#include <stdlib.h> 
+        printf("%c%c%c", a[0], a[1], a[2]);
+    else if (atoi(a) == atoi(b))
+        printf("same");
+    else
+        printf("%c%c%c", b[0], b[1], b[2]);
+}
+
+//다이얼
+void ex5622() {
+    char arr[15];
+    int count = 0;
+    scanf("%s", arr);
+
+    for (int i = 0; i < strlen(arr); i++) { //아스키코드를 활용해 코드 간략화
+        if (arr[i] >= 65 && arr[i] <= 67) { count += 3; }
+        if (arr[i] >= 68 && arr[i] <= 70) { count += 4; }
+        if (arr[i] >= 71 && arr[i] <= 73) { count += 5; }
+        if (arr[i] >= 74 && arr[i] <= 76) { count += 6; }
+        if (arr[i] >= 77 && arr[i] <= 79) { count += 7; }
+        if (arr[i] >= 80 && arr[i] <= 83) { count += 8; }
+        if (arr[i] >= 84 && arr[i] <= 86) { count += 9; }
+        if (arr[i] >= 87 && arr[i] <= 90) { count += 10; }
+    }
+    printf("%d", count);
+}
