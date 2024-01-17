@@ -472,3 +472,293 @@ void ex5622() {
     }
     printf("%d", count);
 }
+
+//stage6 심화1
+
+//새싹
+void ex25083(void) {
+    printf("         ,r'\"7\n"); // 작은 따옴표, 큰 따옴표 출력을 위해서는 앞에 '\'를 추가 
+    printf("r`-_   ,\'  ,/\n");
+    printf(" \\. \". L_r\'\n"); // '\' 출력을 위해서는 '\\' 입력
+    printf("   `~\\/\n");
+    printf("      |\n");
+    printf("      |\n");
+}
+
+//체스
+void ex3003() {
+    int arr1[6] = { 1,1,2,2,2,8 };
+    int arr2[6] = { 0 };
+    for (int i = 0; i < 6; i++) {
+        scanf("%d", &arr2[i]);
+        arr1[i] -= arr2[i];
+    }
+    for (int i = 0; i < 6; i++) {
+        printf("%d ", arr1[i]);
+    }
+}
+
+//별찍기-7
+void ex2444() {
+    int n;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        for (int j = n - i; j > 0; j--)printf(" ");
+        for (int k = 2 * i - 1; k > 0; k--)printf("*");
+        printf("\n");
+    }
+    for (int i = n - 1; i > 0; i--) {
+        for (int j = n - i; j > 0; j--)printf(" ");
+        for (int k = 2 * i - 1; k > 0; k--)printf("*");
+        printf("\n");
+    }
+    return 0;
+}
+
+//팰린드롬인지 확인하기
+void ex10988() {
+    char arr[100];
+    int num = 0;
+    scanf("%s", &arr);
+    for (int i = 0; i < strlen(arr) / 2; i++) {
+        if (arr[i] != arr[strlen(arr) - 1 - i])
+            num = 1;
+    }
+    if (num == 1)
+        printf("0");
+    else
+        printf("1");
+}
+
+//단어공부
+char a[1000005];
+int arr[26];
+
+void ex1157() {
+    int max = 0;
+    char ans;
+
+    scanf("%s", a); //문자열을 입력받는다.
+
+    for (int i = 0; i < strlen(a); i++) //문자열 크기만큼 반복
+        if (a[i] >= 'a') arr[a[i] - 'a']++; //소문자 저
+        else arr[a[i] - 'A']++; //대문자 저장
+
+    for (int i = 0; i < 26; i++) //
+        if (arr[i] == max) {
+            ans = '?';
+        }
+        else if (arr[i] > max) {
+            max = arr[i]; //max보다 빈도가 많은 단어를 max에 저장
+            ans = 'A' + i; //'A'(=65)를 더해 대문자로 출력
+        } printf("%c", ans);
+}
+
+//크로아티아 알파벳벳
+void ex2941() {
+    char s[100];
+    scanf("%s", &s);
+    int cnt = 0, i = 0;
+
+    while (i < strlen(s)) {
+        if (s[i] == 'c') {
+            if (s[i + 1] == '=')
+                i++;
+            else if (s[i + 1] == '-')
+                i++;
+        }
+        else if (s[i] == 'd') {
+            if (s[i + 1] == '-')
+                i++;
+            else if (s[i + 1] == 'z' && s[i + 2] == '=')
+                i += 2;
+        }
+        else if (s[i] == 'l') {
+            if (s[i + 1] == 'j')
+                i++;
+        }
+        else if (s[i] == 'n') {
+            if (s[i + 1] == 'j')
+                i++;
+        }
+        else if (s[i] == 's') {
+            if (s[i + 1] == '=')
+                i++;
+        }
+        else if (s[i] == 'z') {
+            if (s[i + 1] == '=')
+                i++;
+        }
+
+        cnt++;
+        i++;
+    }
+
+    printf("%d", cnt);
+}
+
+//그룹 단어 체커
+void ex1316()
+{
+
+    char input_words[101]; //문자열 배열
+    int N; //input 값 N
+    scanf("%d", &N);
+
+
+    int count = N;
+
+    for (int i = 0; i < N; i++)
+    {
+        char first = '0';
+        int Alphabet[26] = { 0, };
+        scanf("%s", input_words);
+        for (int j = 0; input_words[j] != '\0'; j++)
+        {
+            if (first != input_words[j]) //연속된 경우 통과
+            {
+                first = input_words[j];
+                Alphabet[input_words[j] - 'a'] += 1;
+            }
+            if (Alphabet[input_words[j] - 'a'] == 2)
+            {
+                count -= 1;
+                break;
+            }
+        }
+    }
+    printf("%d", count);
+}
+
+//너의 평점은
+void ex25206(void)
+{
+    double score;
+    char subject[50];
+    char major[2];
+    double sum, sumScore, majorScore = 0.0;
+    for (int i = 0; i < 20; i++) {
+        scanf("%s %lf %s", subject, &score, major);
+        if (major[0] == 'P') {
+            continue;
+        }
+        sumScore += score; //sumScore는 전체학점
+        if (major[0] == 'F') {
+            continue;
+        }
+        else if (major[0] == 'A') {
+            majorScore = 4;
+        }
+        else if (major[0] == 'B') {
+            majorScore = 3;
+        }
+        else if (major[0] == 'C') {
+            majorScore = 2;
+        }
+        else {
+            majorScore = 1;
+        }
+        if (major[1] == '+') { //+가 붙으면 0.5점을 더한다.
+            majorScore += 0.5;
+        }
+        sum += score * majorScore; //학점*점수
+    }
+    printf("%lf", sum / sumScore);
+}
+
+
+
+
+
+//stage7 2차원 배열
+
+//행렬 덧셈
+void ex2738() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    int arr1[n][m], arr2[n][m], sum[n][m];
+
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            scanf("%d", &arr1[i][j]);
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            scanf("%d", &arr2[i][j]);
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            sum[i][j] = arr1[i][j] + arr2[i][j];
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", sum[i][j]);
+        }printf("\n");
+    }
+}
+
+//최댓값 
+void ex2566() {
+    int arr[9][9];
+    int max = -1, x = 0, y = 0;
+    //행렬의 값이 모두 0일때 x,y에 쓰레기값이 들어가 있다.
+
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (arr[i][j] > max) {
+                max = arr[i][j];
+                x = i; y = j;
+            }
+        }
+    }printf("%d\n%d %d", max, x + 1, y + 1);
+}
+
+//세로읽기
+void ex10798() {
+    char arr[5][15] = { 0 }; //0으로 초기화!
+    for (int i = 0; i < 5; i++) {
+        scanf("%s", &arr[i]);
+    }
+    for (int i = 0; i < 15; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (arr[j][i] == '\0')
+                continue;
+            else
+                printf("%c", arr[j][i]);
+        }
+    }
+}
+
+//색종이
+void ex2563() {
+    int sum = 0, cnt = 0, x = 0, y = 0;
+    int arr[100][100] = { 0 };
+
+    scanf("%d", &cnt); //색종이의 수
+
+    for (int i = 0; i < cnt; i++) {
+        scanf("%d %d", &x, &y);
+
+        for (int j = x; j < x + 10; j++) {
+            for (int k = y; k < y + 10; k++) {
+                arr[j][k] = 1;        // 배열에 1을대입
+            }
+        }
+    }
+
+    for (int j = 0; j < 100; j++) {
+        for (int k = 0; k < 100; k++) {
+            if (arr[j][k] == 1)
+                sum++;        // 배열에 1이 있으면 더한다.
+        }
+    }printf("%d", sum);
+}
