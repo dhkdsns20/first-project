@@ -762,3 +762,182 @@ void ex2563() {
         }
     }printf("%d", sum);
 }
+//stage 8 일반 수학 1
+
+//진법 변환
+
+//진법 변환 2
+
+//세탁소 시장 독혁
+
+//중앙 이동 알고리즘
+
+//벌집
+
+//분수찾기
+
+//달팽이는 올라가고 싶다.
+
+
+
+
+//stage 9 약수,배수와 소수
+
+//배수와 약수
+
+//약수 구하기
+
+//약수들의 합
+
+//소수 찾기
+
+//소인수분해
+
+
+
+
+//stage 10 기하: 직사각형과 삼각형
+
+//직사각형
+void ex27323() {
+    int a, b;
+    scanf("%d\n%d", &a, &b);
+    printf("%d", a * b);
+}
+
+//직사각형에서 탈출
+void ex1085() {
+    int x, y, w, h, min = 0;
+    scanf("%d %d %d %d", &x, &y, &w, &h);
+    min = x;
+    if (w - x < min) min = w - x;
+    if (y < min) min = y;
+    if (h - y < min) min = h - y;
+    printf("%d", min);
+}
+
+//네 번째 점
+void ex3009(void)
+{
+    int x[4], y[4], i;
+
+    for (i = 0; i < 3; i++) scanf("%d %d", &x[i], &y[i]);
+    /*x값 서로 비교하여 겹치지 않은 x값을 x[3]에 대입*/
+    if (x[0] == x[1]) x[3] = x[2];
+    else if (x[0] == x[2]) x[3] = x[1];
+    else x[3] = x[0];
+
+    /*y값 서로 비교하여 겹치지 않은 y값을 y[3]에 대입*/
+    if (y[0] == y[1]) y[3] = y[2];
+    else if (y[0] == y[2]) y[3] = y[1];
+    else y[3] = y[0];
+
+    printf("%d %d\n", x[3], y[3]);
+    return 0;
+}
+//수학은 체육과목 입니다.
+void ex15894(void) {
+    long long n;  //n의 범위 때 
+    scanf("%lld", &n);
+    printf("%lld", n * 4);
+}
+
+//대지
+void ex9063() {
+    int n, size = 0;
+    int x[100000], y[100000];
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &x[i], &y[i]);
+    }
+    int max1 = x[0], max2 = y[0], min1 = x[0], min2 = y[0];
+    for (int i = 1; i < n; i++) {
+        if (max1 < x[i]) max1 = x[i];
+        if (min1 > x[i]) min1 = x[i];
+        if (max2 < y[i]) max2 = y[i];
+        if (min2 > y[i]) min2 = y[i];
+    }
+    size = (max1 - min1) * (max2 - min2);
+    printf("%d", size);
+}
+
+//삼각형 외우기
+void ex10101() {
+    int a, b, c;
+    scanf("%d %d %d", &a, &b, &c);
+    if (a + b + c == 180) {
+        if (a == b && b == c)
+            printf("Equilateral");
+        else if (a == b || b == c || c == a)
+            printf("Isosceles");
+        else
+            printf("Scalene");
+    }
+    else
+        printf("Error");
+}
+//삼각형과 세 변
+
+void ex5073() {
+    int x, y, z, max;
+
+    while (1) {
+        scanf("%d %d %d", &x, &y, &z);
+        if (x == y && y == z && z == 0)
+            break;
+        max = x; // x is initially assumed to be the largest
+        if (max < y) {
+            max = y;
+        }
+        if (max < z) { // z is the largest
+            max = z;
+        }
+
+        if (max >= x + y || max >= x + z || max >= y + z) {
+            printf("Invalid\n");
+            continue;
+        }
+
+        if (x == y && y == z) {
+            printf("Equilateral\n");
+        }
+        else if (x == y || y == z || x == z) {
+            printf("Isosceles\n");
+        }
+        else {
+            printf("Scalene\n");
+        }
+    }
+}
+
+//세 막대
+void swap(int arr[], int size) {
+    int temp;
+    for (int a = 0; a < size - 1; a++) {
+        for (int b = 0; b < size - a - 1; b++) {
+            if (arr[b] > arr[b + 1]) {
+                temp = arr[b + 1];
+                arr[b + 1] = arr[b];
+                arr[b] = temp;
+            }
+        }
+    }
+}
+void ex14215() {
+    int i[3];
+
+    scanf("%d %d %d", &i[0], &i[1], &i[2]);
+    swap(i, 3);
+    int sum;
+    sum = i[0] + i[1];
+
+    while (1) {
+        if (i[2] < sum) {
+            sum += i[2];
+            break;
+        }
+        else
+            i[2] -= 1;
+    }
+    printf("%d", sum);
+}
