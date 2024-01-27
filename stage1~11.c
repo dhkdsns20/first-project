@@ -784,15 +784,146 @@ void ex2563() {
 //stage 9 약수,배수와 소수
 
 //배수와 약수
+void ex5086() {
+    int a, b;
+    while (1) {
+        scanf("%d %d", &a, &b);
+        if (a == 0 && b == 0)
+            break;
+        if (a > b) { //배수
+            if (a % b == 0)
+                printf("multiple\n");
+            else
+                printf("neither\n");
+        }
+        else if (a < b) {// 약수
+            if (b % a == 0)
+                printf("factor\n");
+            else
+                printf("neither\n");
+        }
+    }
+}
 
 //약수 구하기
+void ex2501() {
+    int index = 1, n, k;
+    int s[10000];
+    scanf("%d %d", &n, &k);
+    for (int i = 1; i <= n; i++) { //약수 찾기
+        if (n % i == 0) {
+            s[index++] = i;
+        }
+    }
+    if (index < k)
+        printf("0");
+    else
+        printf("%d", s[k]);
+}
+
 
 //약수들의 합
+void ex9506() {
+    int n, k = 0, sum = 0;
+    int s[1000];
+
+    while (1) {
+        scanf("%d", &n);
+        if (n == -1)
+            break;
+        sum = 0; k = 0;//총 합 초기화
+        for (int a = 0; a < 1000; a++) { //약수 저장배열 초기화
+            s[a] = 0;
+        }
+        for (int i = 1; i < n; i++) { //약수 찾기
+            if (n % i == 0) {
+                s[k++] += i;
+                sum += i;
+            }
+        }
+        if (sum == n) { //완전수라면
+            printf("%d = ", n);
+            for (int j = 0; j < k; j++)
+                if (j != k - 1)
+                    printf("%d + ", s[j]);
+                else
+                    printf("%d\n", s[j]);
+        }
+        else { //완전수가 아니면
+            printf("%d is NOT perfect.\n", n);
+        }
+    }
+}
 
 //소수 찾기
+void ex1978() {
+    int n;
+    scanf("%d", &n);
+    int s[n];
+    int index = 0, sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        sum = 0;
+        scanf("%d", &s[i]); //수를 입력받는다.
+        for (int j = 2; j <= s[i]; j++) { //소수 판정
+            if (s[i] % j == 0) //약수(자기자신포함)
+                sum += j;
+        }
+        if (sum != 1 && sum == s[i])
+            index++;
+    }printf("%d", index);
+}
+
+//소수
+void ex2581() {
+    int n = 0, m = 0;
+    scanf("%d %d", &n, &m);
+    int min = 0, sum = 0, total = 0;
+
+    for (int i = n; i <= m; i++) {
+        sum = 0;
+        if (i <= 1) //n이 1인 경우 1이 출력됨.
+            continue;
+
+        for (int j = 2; j < i; j++) { //소수 판정
+            if (i % j == 0) { //2이상의 약수 검사
+                sum = 1;
+                break;  //약수들을 더한다.
+            }
+        }
+        if (sum == 0) { //소수라면(2이상의 약수 x)
+            total += i;
+            if (min == 0)
+                min = i;
+        }
+    }
+    if (total != 0)
+        printf("%d\n%d", total, min); //소수가 있다면  
+    else
+        printf("-1"); //소수가 없다면
+}
 
 //소인수분해
+void ex11653() {
+    int n, tmp = 0, i = 2, k = 0, cnt = 0;
+    int s[10000];
+    scanf("%d", &n);
+    tmp = n;
 
+    while (1) {
+        if (tmp % i == 0) {
+            tmp = tmp / i; //몫
+            s[k++] = i; //나누는 수 저장
+        }
+        else
+            i++; //나누는 수 증가
+        if (tmp <= 1) //모두 나누어 떨어지면
+            break;
+        cnt++;
+    }
+    for (int j = 0; s[j] != '\0'; j++)
+        printf("%d\n", s[j]);
+}
 
 
 
