@@ -765,18 +765,151 @@ void ex2563() {
 //stage 8 일반 수학 1
 
 //진법 변환
+void ex2745() {
+    char input[10000];
+    int B;
+    int result = 0;
+
+    scanf("%s %d", input, &B);      //문자와 진법을 입력받음
+
+    int len = strlen(input);        //문자열 갯수 구하기
+
+    for (int i = 0; i < len; i++) {
+
+        if (input[i] >= '0' && input[i] <= '9') {
+            input[i] = input[i] - '0';
+        }
+        else if (input[i] >= 'A' && input[i] <= 'Z') {
+            input[i] = input[i] - 'A' + 10;
+        }
+        result += input[i] * pow(B, len - 1 - i);      //진법 변환 식
+    }
+    printf("%d", result);
+}
 
 //진법 변환 2
+void convert(int N, int B)
+{
+    if (N != 0) {
+        convert(N / B, B);
+        if (N % B > 9 && B > 10)
+            printf("%c", 'A' + N % B - 10);
+        else
+            printf("%d", N % B);
+    }
+}
 
-//세탁소 시장 독혁
+void ex11005() {
+    int N;
+    int B;
+    scanf("%d", &N);
+    scanf("%d", &B);
+
+    convert(N, B);
+    return 0;
+}
+
+
+
+//세탁소 시장 동혁
+void ex2720() {
+    int a; //테스트케이스
+    int q, d, n, p; //순서대로 쿼터(0.25),다임(0.20),니켈(0.05),페니(0.01)
+    int num;
+    scanf("%d", &a);
+    for (int i = 0; i < a; i++) {
+        scanf("%d", &num);
+        q = num / 25; num = num % 25;
+        d = num / 10; num = num % 10;
+        n = num / 5;  num = num % 5;
+        p = num / 1;
+        printf("%d %d %d %d\n", q, d, n, p);
+    }
+}
 
 //중앙 이동 알고리즘
+void ex2903() {
+    int n; //정사각형의 수
+    int num; //가로에 찍을수 있는 점의 개수
+    scanf("%d", &n);
+    num = pow(2, n - 1);
+    num = 2 * num + 1;
+
+    printf("%d", num * num);
+}
 
 //벌집
+void ex2292() {
+    int start = 1, n = 1;
+    int num, end, index;
+
+    scanf("%d", &num);
+
+    if (num == 1)
+        index = 1;
+    else {
+        start = 2;
+        while (1) {
+            end = start + 6 * n - 1; //종료점 확인
+            if (start <= num && num <= end) { //범위 내에 있다면
+                index = n + 1; //인덱스에 n저장
+                break;
+            }
+            else { //n증가
+                n++;
+                start += 6 * n - 6;
+            }
+        }
+    }
+    printf("%d", index);
+}
 
 //분수찾기
+void ex1193() {
+    int num, i = 0, j = 0, count = 1, n = 1, end = 0, index = 0, start = 0;
+    scanf("%d", &num);
+
+    //num이 몇번째 대각선인지 판단
+    if (num == 1)
+        index = 0;
+    else {
+        start = 2;
+        end = start + 1;
+        while (1) {
+            if (start <= num && num <= end) { //범위 내에 있다면
+                index = n; //인덱스에 n저장
+                break;
+            }
+            else { //n증가
+                start = end + 1; //시작점 변경 
+                n++;
+                end = start + n;
+            }
+        }
+    }
+
+    if (index == 0)
+        printf("1/1");
+    else {
+        if (index % 2 == 0) { //짝수 count
+            printf("%d/%d", index + 1 - num % start, 1 + num % start);
+        }
+        else { //홀수 count
+            printf("%d/%d", 1 + num % start, index + 1 - num % start);
+        }
+    }
+
+}
 
 //달팽이는 올라가고 싶다.
+int main() {
+    int a, b, v;
+    int day = 1;
+    scanf("%d %d %d", &a, &b, &v);
+    day = (v - b - 1) / (a - b) + 1;
+    printf("%d", day);
+
+}
 
 
 
